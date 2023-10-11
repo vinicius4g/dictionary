@@ -55,13 +55,15 @@ Em relação aos testes E2E, mencionei o uso do Detox, uma biblioteca que simula
 ## Executar a API
 
 - Navegue até a pasta backend -> api_dictionary
-- Rode `yarn install`ou `npm install` para instalar as dependências.
+- Rode `yarn` ou `npm install` para instalar as dependências.
 - Rode o `yarn run dev` para iniciar a aplicação.
 
 ## Executar o APP Mobile
 
 - Navegue até a pasta mobile -> dictionary
-- Rode `yarn install` para instalar as dependências.
+
+- Rode `yarn` para instalar as dependências.
+- (Ambiente iOS) -`cd ios && pod install` para instalar as dependências nativas.
 - Rode o `yarn start` para iniciar a aplicação.
 - Rode o `yarn ios` ou `yarn android` para rodar no emulador.
 - Obs: Existe um usuário criado com as seguintes informações: `username: vinicius`, `password: 123`. (Como convidado também é possível testar todo o app).

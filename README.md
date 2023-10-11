@@ -1,104 +1,66 @@
-# Mobile Challenge 🏅 2023 - Dictionary
+# Documentação da API e do Aplicativo
 
-## Introdução
+## API Backend
 
-Este é um desafio para que possamos ver as suas habilidades como Mobile Developer.
+Inicialmente, criei uma API básica em Node.js para disponibilizar os dados necessários para o aplicativo. Essa etapa foi realizada para garantir que o aplicativo tivesse acesso às informações necessárias.
 
-Nesse desafio você deverá desenvolver um aplicativo para listar palavras em inglês, utilizando como base a API [Free Dictionary API](https://dictionaryapi.dev/). O projeto a ser desenvolvido por você tem como objetivo exibir termos em inglês e gerenciar as palavras visualizadas, conforme indicado nos casos de uso que estão logo abaixo.
+Configurei um banco de dados local utilizando o SQLite e elaborei as tabelas para armazenar informações cruciais. Estas tabelas incluem a "WORDS", que registra o valor das palavras e suas respectivas chaves (id); a "USERS", que armazena dados do usuário logado, como nome de usuário, senha e id; além das tabelas "FAVORITES" e "HISTORY", que eram semelhantes e incluíam campos para a id da palavra e a id do usuário. A utilização de chaves estrangeiras (FOREIGN KEYS) nessas tabelas foi uma escolha estratégica para possibilitar relacionamentos e facilitar a obtenção de dados.
 
-[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
+## Front-end
 
-### Antes de começar
+Comecei projetando o layout e os componentes do aplicativo manualmente, criando um esboço para entender onde poderia reutilizar componentes e determinando quais elementos seriam necessários em cada tela. Essa etapa ajudou a estruturar o projeto de maneira eficiente.
 
-- Prepare o projeto para ser disponibilizado no Github, copiando o conteúdo deste repositório para o seu (ou utilize o fork do projeto e aponte para o Github). Confirme que a visibilidade do projeto é pública (não esqueça de colocar no readme a referência a este challenge);
-- O projeto deve utilizar a Linguagem específica na sua Vaga (caso esteja se candidatando). Por exempo: Python, R, Scala e entre outras;
-- Considere como deadline 5 dias a partir do início do desafio. Caso tenha sido convidado a realizar o teste e não seja possível concluir dentro deste período, avise a pessoa que o convidou para receber instruções sobre o que fazer.
-- Documentar todo o processo de investigação para o desenvolvimento da atividade (README.md no seu repositório); os resultados destas tarefas são tão importantes do que o seu processo de pensamento e decisões à medida que as completa, por isso tente documentar e apresentar os seus hipóteses e decisões na medida do possível.
+Optei por desenvolver o aplicativo com o React Native CLI devido à sua robustez e abrangência.
 
-### Instruções iniciais obrigatórias
+Após a etapa de design, dediquei tempo a estudar as bibliotecas que seriam utilizadas no projeto e estruturei o código com componentização, aderindo aos princípios de "Higher Order Components" (HOC).
 
-- Utilize as seguintes tecnologias:
+Utilizei a biblioteca "styled-components" para gerenciar a estilização, mantendo um padrão global que aprimorou a legibilidade do código.
 
-#### Tecnologias (Mobile):
+Configurei as rotas do aplicativo com o "@react-navigation/native", fazendo uso do "react-navigation/bottom-tabs" para a navegação por meio de abas inferiores e "@react-navigation/native-stack" para a autenticação no aplicativo.
 
-- Nativo ou Hibrido (Flutter, Ionic, React Native, etc)
-- Estilização (Material, Semantic, etc). Ou escrever o seu próprio sob medida 👌
-- Gestão de dados (Redux, Context API, IndexedDB, SQLite, etc)
+Para evitar a propagação excessiva de props, implementei o "Context API" para gerenciar o estado do aplicativo, tornando mais fácil o compartilhamento de dados e chamadas à API entre as telas.
 
-Atente-se, ao desenvolver a aplicação mobile, para conceitos de usabilidade e adeque a interface com elementos visuais para os usuários do seu sistema.
+Integrei a lib "react-native-mmkv" para manter os usuários logados, armazenando valores no armazenamento do dispositivo. Essa integração seguiu padrões de injeção de dependência e inversão de dependência. Criei uma pasta "storage" com interfaces para inicializar o armazenamento com base em uma declaração no início do aplicativo (arquivo "App.tsx"), desacoplando a necessidade de uma lib específica.
 
-#### Tecnologias (Back-End):
+Configurei as chamadas à API no arquivo "api.ts" utilizando o Axios e, em algumas situações, o "react-query" para fazer cache de requisições, como solicitado.
 
-- Firebase, Supabase, etc
+A reprodução de áudio proveniente da API foi tratada com a biblioteca "react-native-track-player". Optei por essa lib devido à sua reputação, participação na comunidade e histórico de atualizações.
 
-#### Organização:
+Utilizei a "@shopify/flash-list" para renderizar listas de forma eficiente.
 
-- Aplicação de padrões Clean Code
-- Validação de chamadas assíncronas para evitar travamentos
+Inseri ícones no aplicativo com o auxílio da lib "react-native-svg".
 
-### Modelo de Dados:
+Empreguei a biblioteca "reanimated" para criar animações suaves, como as presentes na tela de login.
 
-Conforme indicado na documentação da API, a API retorna as informações de uma palavra, tais como etimologia, sinônimos, exemplos de uso, etc. Utilize os campos indicados na documentação dos endpoints para obter os dados necessários.
+## Desempenho
 
-### Front-End:
+Com o objetivo de aprimorar o desempenho, incluí o "memo" nos componentes de palavras para evitar repetições à medida que a lista crescia com a rolagem, combinando-o com a "@shopify/flash-list".
 
-Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida para consumir a API do desafio.
+Tratei de maneira eficiente o armazenamento de cache em requisições utilizando o "react-query".
 
-**Obrigatório 1** - Você deverá atender aos seguintes casos de uso:
+Melhorei o armazenamento local com uma biblioteca de alto desempenho.
 
-- Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
-- Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
-- Como usuário, devo ser capaz de salvar a palavra como favorito
-- Como usuário, devo ser capaz de remover a palavra como favorito
-- Como usuário, devo ser capaz de visitar uma lista com as palavras que já vi anteriormente
+## Testes
 
-A API não possui endpoint com a lista de palavras. Essa lista pode ser carregada em memória ou ser salva em banco de dados local ou remoto (por exemplo, com Firebase). Será necessário usar o [arquivo existente dentro do projeto no Github](https://github.com/dwyl/english-words/blob/master/words_dictionary.json).
+Não consegui realizar os testes devido a restrições de tempo, mas possuo conhecimento e experiência em testes unitários e E2E.
 
-**Obrigatório 2** - Salvar em cache o resultado das requisições, para agilizar a resposta em caso de buscas com parâmetros repetidos.
+Para os testes unitários, planejei usar o Jest em conjunto com o "@testing-library/react-native" para avaliar o aplicativo de forma isolada, testando cliques, renderizações, estados e respostas da API.
 
-**Obrigatório 3** - Seguir o wireframe para a página de listagem dos dados. Pode-se alterar a posição dos itens, mantendo as funcionalidades solicitadas.
+Em relação aos testes E2E, mencionei o uso do Detox, uma biblioteca que simula o comportamento do usuário e fornece feedback visual durante os testes. A principal finalidade seria garantir a estabilidade do código e detectar precocemente bugs, especialmente após implementações realizadas por outras equipes.
 
-<img src="./wireframe.png" width="100%" />
+# Executando o projeto
 
-**Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos;
+### OBS: O app só irá funcionar com todas as funcionalidades se rodar o backend (api).
 
-**Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência;
+## Executar a API
 
-**Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
+- Clone o repositório.
+- Rode `yarn install`ou `npm install` para instalar as dependências.
+- Rode o `yarn run dev` para iniciar a aplicação.
 
-**Diferencial 4** - Implementar login com usuário e senha e associar os favoritos e histórico ao ID do usuário, salvando essa informação em banco de dados local ou remoto
+## Executar o APP Mobile
 
-## Readme do Repositório
-
-- Deve conter o título do projeto
-- Uma descrição sobre o projeto em frase
-- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
-- Como instalar e usar o projeto (instruções)
-- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh:
-
-> This is a challenge by [Coodesh](https://coodesh.com/)
-
-## Finalização e Instruções para a Apresentação
-
-Avisar sobre a finalização e enviar para correção.
-
-1. Confira se você respondeu o Scorecard anexado na Vaga que se candidatou;
-2. Confira se você respondeu o Mapeamento anexado na Vaga que se candidatou;
-3. Acesse [https://coodesh.com/challenges/review](https://coodesh.com/challenges/review);
-4. Adicione o repositório com a sua solução;
-5. Grave um vídeo, utilizando o botão na tela de solicitar revisão da Coodesh, com no máximo 5 minutos, com a apresentação do seu projeto. Utilize o tempo para:
-
-- Explicar o objetivo do desafio
-- Quais tecnologias foram utilizadas
-- Mostrar a aplicação em funcionamento
-- Foque em pontos obrigatórios e diferenciais quando for apresentar.
-
-6. Adicione o link da apresentação do seu projeto no README.md.
-7. Verifique se o Readme está bom e faça o commit final em seu repositório;
-8. Confira a vaga desejada;
-9. Envie e aguarde as instruções para seguir no processo. Sucesso e boa sorte. =)
-
-## Suporte
-
-Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma.
+- Clone o repositório.
+- Rode `yarn install` para instalar as dependências.
+- Rode o `yarn start` para iniciar a aplicação.
+- Rode o `yarn ios` ou `yarn android` para rodar no emulador.

@@ -1,79 +1,104 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Mobile Challenge 🏅 2023 - Dictionary
 
-# Getting Started
+## Introdução
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Este é um desafio para que possamos ver as suas habilidades como Mobile Developer.
 
-## Step 1: Start the Metro Server
+Nesse desafio você deverá desenvolver um aplicativo para listar palavras em inglês, utilizando como base a API [Free Dictionary API](https://dictionaryapi.dev/). O projeto a ser desenvolvido por você tem como objetivo exibir termos em inglês e gerenciar as palavras visualizadas, conforme indicado nos casos de uso que estão logo abaixo.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Antes de começar
 
-```bash
-# using npm
-npm start
+- Prepare o projeto para ser disponibilizado no Github, copiando o conteúdo deste repositório para o seu (ou utilize o fork do projeto e aponte para o Github). Confirme que a visibilidade do projeto é pública (não esqueça de colocar no readme a referência a este challenge);
+- O projeto deve utilizar a Linguagem específica na sua Vaga (caso esteja se candidatando). Por exempo: Python, R, Scala e entre outras;
+- Considere como deadline 5 dias a partir do início do desafio. Caso tenha sido convidado a realizar o teste e não seja possível concluir dentro deste período, avise a pessoa que o convidou para receber instruções sobre o que fazer.
+- Documentar todo o processo de investigação para o desenvolvimento da atividade (README.md no seu repositório); os resultados destas tarefas são tão importantes do que o seu processo de pensamento e decisões à medida que as completa, por isso tente documentar e apresentar os seus hipóteses e decisões na medida do possível.
 
-# OR using Yarn
-yarn start
-```
+### Instruções iniciais obrigatórias
 
-## Step 2: Start your Application
+- Utilize as seguintes tecnologias:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+#### Tecnologias (Mobile):
 
-### For Android
+- Nativo ou Hibrido (Flutter, Ionic, React Native, etc)
+- Estilização (Material, Semantic, etc). Ou escrever o seu próprio sob medida 👌
+- Gestão de dados (Redux, Context API, IndexedDB, SQLite, etc)
 
-```bash
-# using npm
-npm run android
+Atente-se, ao desenvolver a aplicação mobile, para conceitos de usabilidade e adeque a interface com elementos visuais para os usuários do seu sistema.
 
-# OR using Yarn
-yarn android
-```
+#### Tecnologias (Back-End):
 
-### For iOS
+- Firebase, Supabase, etc
 
-```bash
-# using npm
-npm run ios
+#### Organização:
 
-# OR using Yarn
-yarn ios
-```
+- Aplicação de padrões Clean Code
+- Validação de chamadas assíncronas para evitar travamentos
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### Modelo de Dados:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+Conforme indicado na documentação da API, a API retorna as informações de uma palavra, tais como etimologia, sinônimos, exemplos de uso, etc. Utilize os campos indicados na documentação dos endpoints para obter os dados necessários.
 
-## Step 3: Modifying your App
+### Front-End:
 
-Now that you have successfully run the app, let's modify it.
+Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida para consumir a API do desafio.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+**Obrigatório 1** - Você deverá atender aos seguintes casos de uso:
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
+- Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
+- Como usuário, devo ser capaz de salvar a palavra como favorito
+- Como usuário, devo ser capaz de remover a palavra como favorito
+- Como usuário, devo ser capaz de visitar uma lista com as palavras que já vi anteriormente
 
-## Congratulations! :tada:
+A API não possui endpoint com a lista de palavras. Essa lista pode ser carregada em memória ou ser salva em banco de dados local ou remoto (por exemplo, com Firebase). Será necessário usar o [arquivo existente dentro do projeto no Github](https://github.com/dwyl/english-words/blob/master/words_dictionary.json).
 
-You've successfully run and modified your React Native App. :partying_face:
+**Obrigatório 2** - Salvar em cache o resultado das requisições, para agilizar a resposta em caso de buscas com parâmetros repetidos.
 
-### Now what?
+**Obrigatório 3** - Seguir o wireframe para a página de listagem dos dados. Pode-se alterar a posição dos itens, mantendo as funcionalidades solicitadas.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+<img src="./img/wireframe.png" width="100%" />
 
-# Troubleshooting
+**Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos;
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+**Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência;
 
-# Learn More
+**Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
 
-To learn more about React Native, take a look at the following resources:
+**Diferencial 4** - Implementar login com usuário e senha e associar os favoritos e histórico ao ID do usuário, salvando essa informação em banco de dados local ou remoto
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Readme do Repositório
+
+- Deve conter o título do projeto
+- Uma descrição sobre o projeto em frase
+- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
+- Como instalar e usar o projeto (instruções)
+- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
+- Se está usando github pessoal, referencie que é um challenge by coodesh:
+
+> This is a challenge by [Coodesh](https://coodesh.com/)
+
+## Finalização e Instruções para a Apresentação
+
+Avisar sobre a finalização e enviar para correção.
+
+1. Confira se você respondeu o Scorecard anexado na Vaga que se candidatou;
+2. Confira se você respondeu o Mapeamento anexado na Vaga que se candidatou;
+3. Acesse [https://coodesh.com/challenges/review](https://coodesh.com/challenges/review);
+4. Adicione o repositório com a sua solução;
+5. Grave um vídeo, utilizando o botão na tela de solicitar revisão da Coodesh, com no máximo 5 minutos, com a apresentação do seu projeto. Utilize o tempo para:
+
+- Explicar o objetivo do desafio
+- Quais tecnologias foram utilizadas
+- Mostrar a aplicação em funcionamento
+- Foque em pontos obrigatórios e diferenciais quando for apresentar.
+
+6. Adicione o link da apresentação do seu projeto no README.md.
+7. Verifique se o Readme está bom e faça o commit final em seu repositório;
+8. Confira a vaga desejada;
+9. Envie e aguarde as instruções para seguir no processo. Sucesso e boa sorte. =)
+
+## Suporte
+
+Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma.
